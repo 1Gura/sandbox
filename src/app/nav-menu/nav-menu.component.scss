@@ -1,0 +1,31 @@
+
+.nav-menu {
+  width: 150px;
+  height: 100%;
+  background-color: red;
+  color: white;
+  font-size: 18px;
+
+  ul {
+    padding: 5px;
+  }
+  //animation: show-menu 0.3s linear;
+}
+
+//@keyframes show-menu {
+//  0% {
+//    margin-left: -150px;
+//  }
+//  100% {
+//    margin-left: 0px;
+//  }
+//}
+//
+//@keyframes close-menu {
+//  0% {
+//    margin-left: 0px;
+//  }
+//  100% {
+//    margin-left: -150px;
+//  }
+//}

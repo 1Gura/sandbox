@@ -3,6 +3,53 @@
   background-color: red;
   height: 100%;
   position: relative;
+
+  &__button {
+    background-color: red;
+    position: absolute;
+    height: 25px;
+    width: 40px;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 500ms;
+
+    &:hover.el-center{
+      left: 5px;
+      transition: 500ms;
+
+    }
+
+    div {
+      background-color: white;
+      width: 100%;
+      height: 3px;
+      left: 0;
+    }
+
+    //Пример того как можно сделать на псевдо элементах
+    //&:before,
+    //&:after,
+    //{
+    //  content: '';
+    //  background-color: white;
+    //  width: 100%;
+    //  height: 3px;
+    //  left: 0;
+    //}
+    //
+    //&:before {
+    //  top:0;
+    //}
+    //
+    //&:after {
+    //  bottom: 0;
+    //}
+  }
+
   &__title {
     width: 100%;
     height: 100%;
