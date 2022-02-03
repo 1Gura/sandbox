@@ -5,17 +5,20 @@ import {MainRoutingModule} from "./main.routing.module";
 import {NavMenuComponent} from "../nav-menu/nav-menu.component";
 import {CrudModule} from "../crud/crud.module";
 import {RouterModule} from "@angular/router";
-
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
     MainComponent,
-    NavMenuComponent
+    NavMenuComponent,
   ],
   imports: [
     CrudModule,
     MainRoutingModule,
-    RouterModule
+    RouterModule,
+    CommonModule,
+    BrowserModule
   ],
   exports:[MainComponent, RouterModule],
   providers: [AppService],
