@@ -1,6 +1,10 @@
 <div *ngIf="appService.isShowMenu" class="nav-menu">
   <ul>
-    <li><a href="">Главная</a></li>
-    <li><a href="">CRUD</a></li>
+    <li>
+      <a [routerLinkActive]="'active'" [routerLink]="['/crud']">CRUD</a>
+    </li>
+    <li>
+      <a [routerLinkActive]="'active'" [routerLink]="['/about']">About</a>
+    </li>
   </ul>
 </div>

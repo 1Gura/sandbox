@@ -1,26 +1,26 @@
 import {NgModule} from "@angular/core";
 import {MainComponent} from "./main.component";
 import {AppService} from "../ shared/app.service";
-import {MainRoutingModule} from "./main.routing.module";
 import {NavMenuComponent} from "../nav-menu/nav-menu.component";
 import {CrudModule} from "../crud/crud.module";
-import {RouterModule} from "@angular/router";
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import {CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+import {MainRoutingModule} from "./main.routing.module";
+import {AboutComponent} from "../about/about.component";
 
 @NgModule({
   declarations: [
     MainComponent,
     NavMenuComponent,
+    AboutComponent
   ],
   imports: [
     CrudModule,
-    MainRoutingModule,
-    RouterModule,
     CommonModule,
-    BrowserModule
+    BrowserModule,
+    MainRoutingModule,
   ],
-  exports:[MainComponent, RouterModule],
+  exports: [MainComponent],
   providers: [AppService],
   bootstrap: []
 })
