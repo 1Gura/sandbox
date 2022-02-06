@@ -1,17 +1,17 @@
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
-import {CrudComponent} from "../crud/crud.component";
 import {AboutComponent} from "../about/about.component";
+import {BrowserModule} from "@angular/platform-browser";
 
 
 const routes: Routes = [
   {
     path: '',
-    component: CrudComponent
+    loadChildren: () => import('../crud/crud.module').then(m => m.CrudModule)
   },
   {
     path: 'crud',
-    component: CrudComponent
+    loadChildren: () => import('../crud/crud.module').then(m => m.CrudModule)
   },
   {
     path: 'about',
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [BrowserModule,RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class MainRoutingModule {

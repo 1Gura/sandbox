@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
-import {AppService} from "../ shared/app.service";
 import {CrudComponent} from "./crud.component";
 import {CrudRoutingModule} from "./crud.routing.module";
+import {AppService} from "../shared/app.service";
 
 @NgModule({
   declarations: [
