@@ -1,11 +1,13 @@
 //Тут стандартные настройки
+@import "src/styles";
+
 .header {
-  background-color: red;
+  background-color: $main-color;
   height: 100%;
   position: relative;
 
   &__button {
-    background-color: red;
+    background-color: $main-color;
     position: absolute;
     height: 25px;
     width: 40px;
@@ -17,7 +19,7 @@
     cursor: pointer;
     transition: all 500ms;
 
-    &:hover.el-center{
+    &:hover.el-center {
       left: 5px;
       transition: 500ms;
 

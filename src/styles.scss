@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -16,9 +17,14 @@ html, body {
   height: 100%;
 }
 
+//Блок с перемеными
+$main-color: #FF4D4D;
+//Блок с перемеными
+
 a {
   text-decoration: none;
   color: white;
+
   &:hover {
     text-decoration: solid white;
     cursor: pointer;
@@ -27,16 +33,17 @@ a {
 
 body {
   height: 100%;
-  background-color: #faf3ef;
 }
 
 .header-component {
   height: 100px;
 }
+
 .main-component {
   flex: 1 1 auto;
   height: 100px;
 }
+
 .footer-component {
   height: 50px;
   text-align: center;
