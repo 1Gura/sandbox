@@ -6,7 +6,9 @@ import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {MainRoutingModule} from "./main.routing.module";
 import {AboutComponent} from "../about/about.component";
-import {AppService} from "../shared/app.service";
+import {AppService} from "../shared/services/app.service";
+import {HttpClientModule} from "@angular/common/http";
+import {MainService} from "./shared/services/main.service";
 
 @NgModule({
   declarations: [
@@ -20,8 +22,8 @@ import {AppService} from "../shared/app.service";
     BrowserModule,
     MainRoutingModule,
   ],
-  exports: [MainComponent, MainRoutingModule],
-  providers: [AppService],
+  exports: [MainComponent, MainRoutingModule, HttpClientModule],
+  providers: [MainService, AppService],
   bootstrap: []
 })
 
