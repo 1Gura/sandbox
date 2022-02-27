@@ -29,12 +29,18 @@ export class GetTabComponent implements OnInit, OnDestroy{
   }
 
   public getTodoByTitle(): void {
-    this.isLoad = true;
-    this.crudService.getTodoByTitle(this.todoForm.get('title')?.value)
-      .subscribe((data: TodoModel[]) => {
-        this.isLoad = false;
-        this.todos = data;
-      });
+    debugger
+    if(this.todoForm.get('title')?.valid) {
+      this.isLoad = true;
+      this.crudService.getTodoByTitle(this.todoForm.get('title')?.value)
+        .subscribe((data: TodoModel[]) => {
+          this.isLoad = false;
+          this.todos = data;
+        });
+    } else {
+      this.todoForm.markAllAsTouched();
+    }
+
   }
 
 

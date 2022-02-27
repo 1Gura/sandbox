@@ -29,7 +29,7 @@ export class BaseService {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append("Access-Control-Allow-Origin", "*");
     headers = headers.append("Access-Control-Allow-Credentials", "true");
-    headers = headers.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    headers = headers.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,PATCH");
     headers = headers.append("Access-Control-Allow-Headers",
       "Access-Control-Allow-Headers," +
       " Origin,Accept, X-Requested-With," +

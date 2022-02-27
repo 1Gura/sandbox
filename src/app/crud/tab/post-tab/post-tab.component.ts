@@ -34,10 +34,9 @@ export class PostTabComponent implements OnInit, OnDestroy{
   }
 
   public createTodo(): void {
-    debugger
     if(this.todoForm.valid) {
       this.crudService.createTodo(<TodoModel>this.todoForm.value).subscribe((todo: TodoModel) => {
-        debugger
+        this.todos.push(todo);
       });
     } else {
       this.todoForm.markAllAsTouched();
