@@ -7,6 +7,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MainModule} from "./main/main.module";
 import {RouterModule} from "@angular/router";
 import {AppService} from "./shared/services/app.service";
+import {CommonModule} from "@angular/common";
+import {MaterialModule} from "./shared/modules/material.module";
 
 @NgModule({
   declarations: [
@@ -16,12 +18,14 @@ import {AppService} from "./shared/services/app.service";
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     MainModule,
-    RouterModule
+    RouterModule,
+    MaterialModule
   ],
   providers: [AppService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

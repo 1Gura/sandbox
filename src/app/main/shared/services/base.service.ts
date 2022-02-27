@@ -1,4 +1,4 @@
-import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 
 export class BaseService {
@@ -16,30 +16,43 @@ export class BaseService {
     let queryParams: HttpParams = new HttpParams();
     let key: string = '';
     for (key in params) {
-      debugger;
       if (params.hasOwnProperty(key)) {
-        queryParams.append(key, params[key]);
+        queryParams = queryParams.append(key, params[key]);
       }
     }
-    return this.httpClient.get(action, {
+    return this.httpClient.get(`${this.prefix}/${action}`, {
       params: queryParams
-    });
+    }).pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
   }
 
-  public post(action: string): Observable<any> {
-    return this.httpClient.get(action);
+  public post(action: string, body: Object): Observable<any> {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append("Access-Control-Allow-Origin", "*");
+    headers = headers.append("Access-Control-Allow-Credentials", "true");
+    headers = headers.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    headers = headers.append("Access-Control-Allow-Headers",
+      "Access-Control-Allow-Headers," +
+      " Origin,Accept, X-Requested-With," +
+      " Content-Type, Access-Control-Request-Method," +
+      " Access-Control-Request-Headers");
+    debugger
+    return this.httpClient.post(`${this.prefix}/${action}`, body, {headers: headers})
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
   }
 
   public put(action: string): Observable<any> {
-    return this.httpClient.get(action);
+    return this.httpClient.get(action)
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));;
   }
 
   public patch(action: string): Observable<any> {
-    return this.httpClient.get(action);
+    return this.httpClient.get(action)
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));;
   }
 
   public delete(action: string): Observable<any> {
-    return this.httpClient.get(action);
+    return this.httpClient.get(action)
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));;
   }
 
   protected handleError(error: HttpErrorResponse) {

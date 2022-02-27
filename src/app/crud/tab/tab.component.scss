@@ -1,0 +1,26 @@
+::ng-deep .tab-container {
+  min-width: 1200px;
+  min-height: 500px;
+  padding: 10px;
+}
+
+::ng-deep .tab {
+  padding: 10px;
+  min-height: 500px;
+}
+
+::ng-deep .tab-content {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid grey;
+}
+
+::ng-deep .todo {
+  border: 1px solid red;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+::ng-deep .mat-form-field {
+  display: block !important;
+}

@@ -62,3 +62,11 @@ body {
 .active {
   color: black;
 }
+
+
+//mat стили
+::ng-deep .mat-tab-body-wrapper {
+  min-height: 500px;
+  padding: 10px;
+}
+//mat стили

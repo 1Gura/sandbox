@@ -1,0 +1,34 @@
+<div>
+  <button mat-raised-button (click)="createTodo()">Добавить новый Todo</button>
+  <div class="tab-content">
+    <form [formGroup]="todoForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Введите заголовок статьи</mat-label>
+        <input [formControlName]="'title'" matInput placeholder="Заголовок"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Введите Описание статьи</mat-label>
+        <textarea matInput
+                  [formControlName]="'description'" placeholder="Описание"
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="15"></textarea>
+      </mat-form-field>
+    </form>
+    <ng-container *ngIf="!isLoad; else loader">
+      <ul>
+        <li *ngFor="let todo of todos; index as i">
+          <div class="todo">
+            <div>Заголовок: {{todo.title}}</div>
+            <div>Описание: {{todo.description}}</div>
+            <mat-checkbox [checked]="todo.done" (change)="checked($event, todo)"></mat-checkbox>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #loader>
+      <spinner-load [isLoad]="isLoad"></spinner-load>
+    </ng-template>
+  </div>
+</div>

@@ -1,7 +1,27 @@
-<mat-tab-group>
-  <mat-tab label="First"> Content 1 </mat-tab>
-  <mat-tab label="Second"> Content 2 </mat-tab>
-  <mat-tab label="Third"> Content 3 </mat-tab>
+<mat-tab-group class="tab-container">
+  <mat-tab class="tab" label="GET_ALL">
+    <app-get-tab-all></app-get-tab-all>
+  </mat-tab>
+  <mat-tab class="tab" label="GET">
+    <app-get-tab></app-get-tab>
+  </mat-tab>
+  <mat-tab class="tab" label="POST">
+    <app-post-tab></app-post-tab>
+  </mat-tab>
+  <mat-tab class="tab" label="PUT">
+    <button mat-raised-button>Получить все</button>
+
+    <div class="tab-content">
+
+    </div>
+  </mat-tab>
+  <mat-tab class="tab" label="DELETE">
+    <button mat-raised-button>Получить все</button>
+
+    <div class="tab-content">
+
+    </div>
+  </mat-tab>
 </mat-tab-group>
 
 

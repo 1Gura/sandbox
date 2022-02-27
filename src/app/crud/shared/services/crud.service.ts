@@ -14,4 +14,12 @@ export class CrudService extends BaseService {
   public getTodos(): Observable<TodoModel[]> {
     return this.get('getTodos');
   }
+
+  public getTodoByTitle(title: string): Observable<TodoModel[]> {
+    return this.getParameters('getTodoByTitle', {title});
+  }
+
+  public createTodo(todo: TodoModel): Observable<TodoModel> {
+    return this.post('createTodo', todo);
+  }
 }

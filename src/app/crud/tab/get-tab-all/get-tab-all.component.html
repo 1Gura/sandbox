@@ -1,0 +1,19 @@
+<div>
+  <button mat-raised-button (click)="getAllTodos()">Получить все</button>
+  <div class="tab-content">
+    <ng-container *ngIf="!isLoad; else loader">
+      <ul>
+        <li *ngFor="let todo of todos; index as i">
+          <div class="todo">
+            <div>Заголовок: {{todo.title}}</div>
+            <div>Описание: {{todo.description}}</div>
+            <mat-checkbox [checked]="todo.done" (change)="checked($event, todo)"></mat-checkbox>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #loader>
+      <spinner-load [isLoad]="isLoad"></spinner-load>
+    </ng-template>
+  </div>
+</div>
