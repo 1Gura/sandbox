@@ -8,11 +8,14 @@ import {TodoModel} from "./shared/models/todo.model";
   templateUrl: './crud.component.html',
   styleUrls: ['./crud.component.scss']
 })
-export class CrudComponent /*implements OnInit, OnDestroy*/ {
+export class CrudComponent {
   private unsubscribe: Subject<void> = new Subject<void>();
   public todos: TodoModel[] = [];
+
   constructor(private crudService: CrudService) {
+
   }
+
   //
   // public ngOnInit(): void {
   //   this.crudService.getTodos()
