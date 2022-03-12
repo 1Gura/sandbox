@@ -1,0 +1,44 @@
+<div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <button (click)="changeTodo()" *ngIf="isHaveTodo; else getTodo" mat-raised-button>Изменить Todo</button>
+    <ng-template #getTodo>
+      <button (click)="getTodoById()" mat-raised-button>Получить Todo</button>
+    </ng-template>
+    <button (click)="clear()" *ngIf="isHaveTodo" mat-raised-button>Отмена</button>
+  </div>
+  <div class="tab-content">
+    <form *ngIf="isHaveTodo; else formId" [formGroup]="todoForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Введите заголовок статьи</mat-label>
+        <input [formControlName]="'title'" matInput placeholder="Заголовок"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Введите Описание статьи</mat-label>
+        <textarea #autosize="cdkTextareaAutosize"
+                  [formControlName]="'description'" cdkAutosizeMaxRows="15"
+                  cdkAutosizeMinRows="1"
+                  cdkTextareaAutosize
+                  matInput
+                  placeholder="Описание"></textarea>
+      </mat-form-field>
+    </form>
+    <ng-template #formId>
+      <form [formGroup]="todoForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Введите id статьи</mat-label>
+          <input [formControlName]="'id'" matInput placeholder="ID"/>
+        </mat-form-field>
+      </form>
+    </ng-template>
+    <ng-container *ngIf="!isLoad; else loader">
+      <ul>
+        <li *ngFor="let todo of todos; index as i">
+          <app-app-todo [todo]="todo"></app-app-todo>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-template #loader>
+      <spinner-load [isLoad]="isLoad"></spinner-load>
+    </ng-template>
+  </div>
+</div>

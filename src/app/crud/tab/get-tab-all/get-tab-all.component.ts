@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Subject, takeUntil} from "rxjs";
-import {TodoModel} from "../../shared/models/todo.model";
-import {CrudService} from "../../shared/services/crud.service";
-import {MatCheckboxChange} from "@angular/material/checkbox";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { TodoModel } from '../../shared/models/todo.model';
+import { CrudService } from '../../shared/services/crud.service';
 
 @Component({
   selector: 'app-get-tab-all',
@@ -10,10 +9,10 @@ import {MatCheckboxChange} from "@angular/material/checkbox";
   styleUrls: ['get-tab-all.component.scss']
 })
 
-export class GetTabAllComponent implements OnInit, OnDestroy{
-  private unsubscribe: Subject<void> = new Subject<void>();
+export class GetTabAllComponent implements OnInit, OnDestroy {
   public todos: TodoModel[] = [];
   public isLoad: boolean = false;
+  private unsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private crudService: CrudService) {
   }
@@ -29,16 +28,12 @@ export class GetTabAllComponent implements OnInit, OnDestroy{
         this.isLoad = false;
         this.todos = data;
       }, error => {
-        console.error(error.message)
+        console.error(error.message);
       });
   }
 
   public ngOnDestroy(): void {
     this.unsubscribe.next();
-    this.unsubscribe.complete()
-  }
-
-  public checked(checkboxChange: MatCheckboxChange, todo: TodoModel): void {
-    todo.done = checkboxChange.checked;
+    this.unsubscribe.complete();
   }
 }

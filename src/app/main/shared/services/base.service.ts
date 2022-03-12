@@ -1,11 +1,20 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
-import {catchError, Observable, throwError} from "rxjs";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 
 export class BaseService {
   protected prefix: string = '';
+  private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private httpClient: HttpClient, prefix: string) {
     this.prefix = prefix;
+    this.headers = this.headers.append('Access-Control-Allow-Origin', '*');
+    this.headers = this.headers.append('Access-Control-Allow-Credentials', 'true');
+    this.headers = this.headers.append('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,PATCH');
+    this.headers = this.headers.append('Access-Control-Allow-Headers',
+      'Access-Control-Allow-Headers,' +
+      ' Origin,Accept, X-Requested-With,' +
+      ' Content-Type, Access-Control-Request-Method,' +
+      ' Access-Control-Request-Headers');
   }
 
   public get(action: string): Observable<any> {
@@ -26,33 +35,25 @@ export class BaseService {
   }
 
   public post(action: string, body: Object): Observable<any> {
-    let headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append("Access-Control-Allow-Origin", "*");
-    headers = headers.append("Access-Control-Allow-Credentials", "true");
-    headers = headers.append("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,PATCH");
-    headers = headers.append("Access-Control-Allow-Headers",
-      "Access-Control-Allow-Headers," +
-      " Origin,Accept, X-Requested-With," +
-      " Content-Type, Access-Control-Request-Method," +
-      " Access-Control-Request-Headers");
-    debugger
-    return this.httpClient.post(`${this.prefix}/${action}`, body, {headers: headers})
+    return this.httpClient.post(`${this.prefix}/${action}`, body, {headers: this.headers})
       .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
   }
 
   public put(action: string): Observable<any> {
     return this.httpClient.get(action)
-      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));;
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
+
   }
 
-  public patch(action: string): Observable<any> {
-    return this.httpClient.get(action)
-      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));;
+  public patch(action: string, body: Object): Observable<any> {
+    return this.httpClient.patch(`${this.prefix}/${action}`, body, {headers: this.headers})
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
   }
 
   public delete(action: string): Observable<any> {
-    return this.httpClient.get(action)
-      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));;
+    return this.httpClient.delete(`${this.prefix}/${action}`, {headers: this.headers})
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
+
   }
 
   protected handleError(error: HttpErrorResponse) {

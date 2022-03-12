@@ -1,14 +1,10 @@
 <div>
-  <button mat-raised-button (click)="getAllTodos()">Получить все</button>
+  <button (click)="getAllTodos()" mat-raised-button>Получить все</button>
   <div class="tab-content">
     <ng-container *ngIf="!isLoad; else loader">
       <ul>
         <li *ngFor="let todo of todos; index as i">
-          <div class="todo">
-            <div>Заголовок: {{todo.title}}</div>
-            <div>Описание: {{todo.description}}</div>
-            <mat-checkbox [checked]="todo.done" (change)="checked($event, todo)"></mat-checkbox>
-          </div>
+          <app-app-todo (changeListTodo)="getAllTodos()" [todo]="todo"></app-app-todo>
         </li>
       </ul>
     </ng-container>

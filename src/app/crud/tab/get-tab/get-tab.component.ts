@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Subject, takeUntil} from "rxjs";
-import {TodoModel} from "../../shared/models/todo.model";
-import {CrudService} from "../../shared/services/crud.service";
-import {MatCheckboxChange} from "@angular/material/checkbox";
-import {TodoFormGroup} from "../../shared/form-group/todo.form-group";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { TodoModel } from '../../shared/models/todo.model';
+import { CrudService } from '../../shared/services/crud.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { TodoFormGroup } from '../../shared/form-group/todo.form-group';
 
 @Component({
   selector: 'app-get-tab',
@@ -11,11 +11,11 @@ import {TodoFormGroup} from "../../shared/form-group/todo.form-group";
   styleUrls: ['get-tab.component.scss']
 })
 
-export class GetTabComponent implements OnInit, OnDestroy{
-  private unsubscribe: Subject<void> = new Subject<void>();
+export class GetTabComponent implements OnInit, OnDestroy {
   public todos: TodoModel[] = [];
   public isLoad: boolean = false;
   public todoForm: TodoFormGroup = new TodoFormGroup();
+  private unsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private crudService: CrudService) {
   }
@@ -25,12 +25,11 @@ export class GetTabComponent implements OnInit, OnDestroy{
 
   public ngOnDestroy(): void {
     this.unsubscribe.next();
-    this.unsubscribe.complete()
+    this.unsubscribe.complete();
   }
 
   public getTodoByTitle(): void {
-    debugger
-    if(this.todoForm.get('title')?.valid) {
+    if (this.todoForm.get('title')?.valid) {
       this.isLoad = true;
       this.crudService.getTodoByTitle(this.todoForm.get('title')?.value)
         .subscribe((data: TodoModel[]) => {
