@@ -5,13 +5,13 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class TabService {
   public currentTab: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  public todoForm: TodoFormGroup = new TodoFormGroup();
+  public todoForm: BehaviorSubject<TodoFormGroup> = new BehaviorSubject<TodoFormGroup>(new TodoFormGroup());
 
   constructor() {
   }
 
   public clearTodoForm(): void {
-    this.todoForm.reset();
+    this.todoForm.value.reset();
   }
 
   public setCurrentTab(numberTab: number): void {

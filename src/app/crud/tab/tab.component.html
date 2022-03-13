@@ -1,4 +1,4 @@
-<mat-tab-group [selectedIndex]="currentTab" class="tab-container">
+<mat-tab-group (selectedIndexChange)="changeTabNumber($event)" [selectedIndex]="currentTab" class="tab-container">
   <mat-tab class="tab" label="GET_ALL">
     <app-get-tab-all></app-get-tab-all>
   </mat-tab>

@@ -25,11 +25,10 @@ export class PatchTabComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.setValidators();
-    if (this.tabService.todoForm.get('id')?.value) {
+    this.tabService.todoForm.pipe(takeUntil(this.unsubscribe)).subscribe((data: TodoFormGroup) => {
+      this.todoForm = data;
       this.isHaveTodo = true;
-      this.todoForm = this.tabService.todoForm;
-      this.tabService.clearTodoForm();
-    }
+    });
   }
 
   public ngOnDestroy(): void {

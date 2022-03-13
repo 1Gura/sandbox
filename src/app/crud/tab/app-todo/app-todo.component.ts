@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TodoModel } from '../../shared/models/todo.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { CrudService } from '../../shared/services/crud.service';
@@ -11,7 +11,7 @@ import { TodoFormGroup } from '../../shared/form-group/todo.form-group';
   templateUrl: './app-todo.component.html',
   styleUrls: ['./app-todo.component.scss']
 })
-export class AppTodoComponent implements OnInit {
+export class AppTodoComponent {
 
   @Input() todo: TodoModel = new TodoModel();
   @Output() changeListTodo: EventEmitter<void> = new EventEmitter<void>();
@@ -23,9 +23,6 @@ export class AppTodoComponent implements OnInit {
 
   public checked(checkboxChange: MatCheckboxChange, todo: TodoModel): void {
     todo.done = checkboxChange.checked;
-  }
-
-  public ngOnInit(): void {
   }
 
   public deleteTodo(): void {
@@ -42,8 +39,7 @@ export class AppTodoComponent implements OnInit {
   public setPatchTab(): void {
     const todoForm: TodoFormGroup = new TodoFormGroup();
     todoForm.patchValue(this.todo);
-    debugger
-    this.tabService.todoForm = todoForm;
+    this.tabService.todoForm.next(todoForm);
     this.tabService.setCurrentTab(3);
   }
 }

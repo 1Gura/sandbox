@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { TodoModel } from '../shared/models/todo.model';
 import { CrudService } from '../shared/services/crud.service';
@@ -13,7 +13,7 @@ import { TabService } from '../shared/services/tab.service';
   styleUrls: ['tab.component.scss'],
   templateUrl: 'tab.component.html',
 })
-export class TabComponent {
+export class TabComponent implements OnInit, OnDestroy {
   public todos: TodoModel[] = [];
   public isLoad: boolean = false;
   public todoForm: TodoFormGroup = new TodoFormGroup();
@@ -27,6 +27,7 @@ export class TabComponent {
     this.tabService.currentTab
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((tabNumber: number) => {
+        // debugger
         this.currentTab = tabNumber;
       });
   }
@@ -36,6 +37,9 @@ export class TabComponent {
     this.unsubscribe.complete();
   }
 
+  public changeTabNumber(currentTab: number): void {
+    this.tabService.currentTab.next(currentTab);
+  }
 }
 
 
