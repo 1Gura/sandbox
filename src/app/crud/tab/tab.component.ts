@@ -27,7 +27,6 @@ export class TabComponent implements OnInit, OnDestroy {
     this.tabService.currentTab
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((tabNumber: number) => {
-        // debugger
         this.currentTab = tabNumber;
       });
   }

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { TodoModel } from '../../shared/models/todo.model';
 import { CrudService } from '../../shared/services/crud.service';
+import { SnackBarService } from '../../../shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-get-tab-all',
@@ -14,10 +15,11 @@ export class GetTabAllComponent implements OnInit, OnDestroy {
   public isLoad: boolean = false;
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private crudService: CrudService) {
+  constructor(private crudService: CrudService, private snackBarService: SnackBarService) {
   }
 
   public ngOnInit(): void {
+    this.snackBarService.openSnackBar();
   }
 
   public getAllTodos(): void {

@@ -19,6 +19,7 @@ html, body {
 
 //Блок с перемеными
 $main-color: #FF4D4D;
+$color-error: #ec2626;
 //Блок с перемеными
 
 a {
@@ -67,6 +68,10 @@ body {
 ::ng-deep .mat-tab-body-wrapper {
   min-height: 500px;
   padding: 10px;
+}
+
+.mat-snack-bar-container {
+  background-color: $color-error;
 }
 
 //mat стили

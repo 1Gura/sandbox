@@ -14,6 +14,7 @@ import { PatchTabComponent } from './patch-tab/patch-tab.component';
 import { FlexModule } from '@angular/flex-layout';
 import { AppTodoComponent } from './app-todo/app-todo.component';
 import { TabService } from '../shared/services/tab.service';
+import { SnackBarService } from '../../shared/services/snack-bar.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { TabService } from '../shared/services/tab.service';
     GetTabComponent,
     PostTabComponent,
     PatchTabComponent,
-    AppTodoComponent
+    AppTodoComponent,
   ],
   imports: [
     FormsModule,
@@ -32,9 +33,9 @@ import { TabService } from '../shared/services/tab.service';
     MaterialModule,
     ReactiveFormsModule,
     CommonModule,
-    FlexModule
+    FlexModule,
   ],
-  providers: [CrudService, TabService],
+  providers: [CrudService, TabService, SnackBarService],
   exports: [TabComponent],
   bootstrap: [TabComponent],
 })

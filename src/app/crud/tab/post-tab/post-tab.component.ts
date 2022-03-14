@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { TodoModel } from '../../shared/models/todo.model';
 import { CrudService } from '../../shared/services/crud.service';
@@ -11,7 +11,7 @@ import { TodoFormGroup } from '../../shared/form-group/todo.form-group';
   styleUrls: ['post-tab.component.scss']
 })
 
-export class PostTabComponent implements OnInit, OnDestroy {
+export class PostTabComponent implements OnDestroy {
   public todos: TodoModel[] = [];
   public isLoad: boolean = false;
   public todoForm: TodoFormGroup = new TodoFormGroup();
@@ -19,10 +19,6 @@ export class PostTabComponent implements OnInit, OnDestroy {
 
   constructor(private crudService: CrudService) {
   }
-
-  public ngOnInit(): void {
-  }
-
 
   public ngOnDestroy(): void {
     this.unsubscribe.next();
