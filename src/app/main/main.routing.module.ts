@@ -1,7 +1,7 @@
-import {RouterModule, Routes} from "@angular/router";
-import {NgModule} from "@angular/core";
-import {AboutComponent} from "../about/about.component";
-import {BrowserModule} from "@angular/platform-browser";
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AboutComponent } from '../shared/components/about/about.component';
 
 
 const routes: Routes = [
@@ -24,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [BrowserModule,RouterModule.forRoot(routes)],
+  imports: [BrowserModule, RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class MainRoutingModule {
