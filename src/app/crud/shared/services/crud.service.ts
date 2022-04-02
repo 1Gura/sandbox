@@ -11,7 +11,7 @@ export class CrudService extends BaseService {
   constructor(
     private http: HttpClient,
     snackBarService: SnackBarService) {
-    super(http, 'https://localhost:7151/api/todo', snackBarService);
+    super(http, '/api/todo', snackBarService);
   }
 
   public getTodos(): Observable<TodoModel[]> {
