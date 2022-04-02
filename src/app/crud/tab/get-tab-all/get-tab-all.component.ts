@@ -19,7 +19,6 @@ export class GetTabAllComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.snackBarService.openSnackBar();
   }
 
   public getAllTodos(): void {
@@ -30,7 +29,12 @@ export class GetTabAllComponent implements OnInit, OnDestroy {
         this.isLoad = false;
         this.todos = data;
       }, error => {
-        console.error(error.message);
+        this.isLoad = false;
+        if (error.status === 404) {
+          this.snackBarService.openSnackBar('Ошибка получения записей');
+        } else {
+          this.snackBarService.openSnackBar(error.error);
+        }
       });
   }
 

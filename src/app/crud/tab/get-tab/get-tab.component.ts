@@ -4,6 +4,7 @@ import { TodoModel } from '../../shared/models/todo.model';
 import { CrudService } from '../../shared/services/crud.service';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { TodoFormGroup } from '../../shared/form-group/todo.form-group';
+import { SnackBarService } from '../../../shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-get-tab',
@@ -17,7 +18,7 @@ export class GetTabComponent implements OnInit, OnDestroy {
   public todoForm: TodoFormGroup = new TodoFormGroup();
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private crudService: CrudService) {
+  constructor(private crudService: CrudService, private snackBarService: SnackBarService) {
   }
 
   public ngOnInit(): void {
@@ -35,6 +36,13 @@ export class GetTabComponent implements OnInit, OnDestroy {
         .subscribe((data: TodoModel[]) => {
           this.isLoad = false;
           this.todos = data;
+        }, error => {
+          this.isLoad = false;
+          if (error.status === 404) {
+            this.snackBarService.openSnackBar('Ошибка получения записей');
+          } else {
+            this.snackBarService.openSnackBar(error.error);
+          }
         });
     } else {
       this.todoForm.markAllAsTouched();

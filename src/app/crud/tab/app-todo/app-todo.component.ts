@@ -5,6 +5,7 @@ import { CrudService } from '../../shared/services/crud.service';
 import { Subject, takeUntil } from 'rxjs';
 import { TabService } from '../../shared/services/tab.service';
 import { TodoFormGroup } from '../../shared/form-group/todo.form-group';
+import { SnackBarService } from '../../../shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-app-todo',
@@ -18,7 +19,7 @@ export class AppTodoComponent {
   public disabledButton: boolean = false;
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private crudService: CrudService, private tabService: TabService) {
+  constructor(private crudService: CrudService, private tabService: TabService, private snackBarService: SnackBarService) {
   }
 
   public checked(checkboxChange: MatCheckboxChange, todo: TodoModel): void {
@@ -32,7 +33,11 @@ export class AppTodoComponent {
       .subscribe((data: TodoModel) => {
         this.changeListTodo.emit();
       }, error => {
-        this.disabledButton = false;
+        if (error.status === 404) {
+          this.snackBarService.openSnackBar('Ошибка получения записей');
+        } else {
+          this.snackBarService.openSnackBar(error.error);
+        }
       });
   }
 

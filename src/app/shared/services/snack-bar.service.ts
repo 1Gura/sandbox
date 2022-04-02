@@ -4,12 +4,14 @@ import { SnackBarComponent } from '../components/snack-bar/snack-bar.component';
 
 @Injectable()
 export class SnackBarService {
+  public message: string = '';
   private durationSecond: number = 4;
 
   constructor(private _snackBar: MatSnackBar) {
   }
 
-  public openSnackBar(): void {
+  public openSnackBar(message: string = 'Что-то пошло не так'): void {
+    this.message = message;
     this._snackBar.openFromComponent(SnackBarComponent, {
       duration: this.durationSecond * 1000,
     });

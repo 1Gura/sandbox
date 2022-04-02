@@ -6,6 +6,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { TodoFormGroup } from '../../shared/form-group/todo.form-group';
 import { Validators } from '@angular/forms';
 import { TabService } from '../../shared/services/tab.service';
+import { SnackBarService } from '../../../shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-patch-tab',
@@ -20,7 +21,7 @@ export class PatchTabComponent implements OnInit, OnDestroy {
   public isHaveTodo: boolean = false;
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private crudService: CrudService, private tabService: TabService) {
+  constructor(private crudService: CrudService, private tabService: TabService, private snackBarService: SnackBarService) {
   }
 
   public ngOnInit(): void {
@@ -70,6 +71,13 @@ export class PatchTabComponent implements OnInit, OnDestroy {
       ? this.crudService.changeTodo(this.todoForm.value)
         .pipe(takeUntil(this.unsubscribe))
         .subscribe((data: TodoModel) => {
+        }, error => {
+          this.isLoad = false;
+          if (error.status === 404) {
+            this.snackBarService.openSnackBar('Ошибка получения записей');
+          } else {
+            this.snackBarService.openSnackBar(error.error);
+          }
         })
       : this.todoForm.markAllAsTouched();
   }

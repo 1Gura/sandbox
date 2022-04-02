@@ -1,11 +1,15 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
+import { SnackBarService } from '../../../shared/services/snack-bar.service';
 
 export class BaseService {
   protected prefix: string = '';
   private headers: HttpHeaders = new HttpHeaders();
 
-  constructor(private httpClient: HttpClient, prefix: string) {
+  constructor(
+    private httpClient: HttpClient,
+    prefix: string,
+    private snackBarService: SnackBarService) {
     this.prefix = prefix;
     this.headers = this.headers.append('Access-Control-Allow-Origin', '*');
     this.headers = this.headers.append('Access-Control-Allow-Credentials', 'true');
@@ -60,6 +64,8 @@ export class BaseService {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);
+    } else if (error.status >= 400 && error.status < 500) {
+
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
@@ -67,6 +73,6 @@ export class BaseService {
         `Backend returned code ${error.status}, body was: `, error.error);
     }
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(error);
   }
 }

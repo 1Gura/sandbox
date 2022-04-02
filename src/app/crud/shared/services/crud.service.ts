@@ -3,12 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseService } from '../../../main/shared/services/base.service';
 import { TodoModel } from '../models/todo.model';
+import { SnackBarService } from '../../../shared/services/snack-bar.service';
 
 @Injectable()
 
 export class CrudService extends BaseService {
-  constructor(private http: HttpClient) {
-    super(http, 'https://localhost:7151/api/todo');
+  constructor(
+    private http: HttpClient,
+    snackBarService: SnackBarService) {
+    super(http, 'https://localhost:7151/api/todo', snackBarService);
   }
 
   public getTodos(): Observable<TodoModel[]> {
