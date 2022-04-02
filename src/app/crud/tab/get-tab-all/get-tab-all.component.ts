@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { TodoModel } from '../../shared/models/todo.model';
 import { CrudService } from '../../shared/services/crud.service';
@@ -10,7 +10,7 @@ import { SnackBarService } from '../../../shared/services/snack-bar.service';
   styleUrls: ['get-tab-all.component.scss']
 })
 
-export class GetTabAllComponent implements OnInit, OnDestroy {
+export class GetTabAllComponent implements OnDestroy {
   public todos: TodoModel[] = [];
   public isLoad: boolean = false;
   private unsubscribe: Subject<void> = new Subject<void>();
@@ -18,7 +18,9 @@ export class GetTabAllComponent implements OnInit, OnDestroy {
   constructor(private crudService: CrudService, private snackBarService: SnackBarService) {
   }
 
-  public ngOnInit(): void {
+  public ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   public getAllTodos(): void {
@@ -36,10 +38,5 @@ export class GetTabAllComponent implements OnInit, OnDestroy {
           this.snackBarService.openSnackBar(error.error);
         }
       });
-  }
-
-  public ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
   }
 }
