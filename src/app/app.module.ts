@@ -11,6 +11,7 @@ import { MaterialModule } from './shared/modules/material.module';
 import { CrudModule } from './crud/crud.module';
 import { SnackBarModule } from './shared/components/snack-bar/snack-bar.module';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
     RouterModule,
     MaterialModule,
     CrudModule,
-    SnackBarModule
+    SnackBarModule,
+    FlexModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent],

@@ -1,10 +1,16 @@
 <header class="header">
-  <button (click)="appService.showMenu()" class="header__button">
-    <div></div>
-    <div class="el-center"></div>
-    <div></div>
-  </button>
-  <div class="header__title">
-    <h1>SandBox</h1>
+  <div class="header__container">
+    <button (click)="appService.showMenu()" class="header__button">
+      <div></div>
+      <div class="el-center"></div>
+      <div></div>
+    </button>
+    <div class="header__title">
+      <h1>SandBox</h1>
+    </div>
+    <div class="header__block-auth" fxLayoutGap="10px">
+      <button mat-raised-button color="primary" [routerLink]="['/auth/login']">Sign in</button>
+      <button mat-raised-button color="primary" [routerLink]="['/auth/register']">Sign up</button>
+    </div>
   </div>
 </header>

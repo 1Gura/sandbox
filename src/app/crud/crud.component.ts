@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CrudService} from "./shared/services/crud.service";
-import {Subject, takeUntil} from "rxjs";
-import {TodoModel} from "./shared/models/todo.model";
+import { Component } from '@angular/core';
+import { CrudService } from './shared/services/crud.service';
+import { Subject } from 'rxjs';
+import { TodoModel } from './shared/models/todo.model';
 
 @Component({
   selector: 'app-crud',

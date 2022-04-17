@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: () => import('../crud/crud.module').then(m => m.CrudModule)
   },
   {
+    path: 'auth',
+    loadChildren: () => import('../auth/auth.module').then(m => m.AuthModule)
+  },
+  {
     path: 'about',
     component: AboutComponent
   },

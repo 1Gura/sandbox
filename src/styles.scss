@@ -74,4 +74,8 @@ body {
   background-color: $color-error;
 }
 
+::ng-deep .mat-form-field {
+  display: block !important;
+}
+
 //mat стили
