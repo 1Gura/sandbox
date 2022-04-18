@@ -1,1 +1,13 @@
-<p>login works!</p>
+<div class="auth">
+  <div class="auth-form" [formGroup]="loginFormGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>Введите email</mat-label>
+      <input [formControlName]="'email'" matInput placeholder="example@mail.com"/>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Введите пароль</mat-label>
+      <input [formControlName]="'password'" type="password" matInput placeholder="!Ilya123"/>
+    </mat-form-field>
+    <button mat-button (click)="loginUser()">Вход</button>
+  </div>
+</div>

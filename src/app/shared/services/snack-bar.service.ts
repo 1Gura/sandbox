@@ -16,4 +16,11 @@ export class SnackBarService {
       duration: this.durationSecond * 1000,
     });
   }
+
+  public openSnackBarArr(errors: string[] = ['Что-то пошло не так']): void {
+    this.message = errors.join(',');
+    this._snackBar.openFromComponent(SnackBarComponent, {
+      duration: this.durationSecond * 1000,
+    });
+  }
 }
