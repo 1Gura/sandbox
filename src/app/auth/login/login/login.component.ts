@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginFormGroup } from '../../shared/form/login.form-group';
 import { Subject, take, takeUntil } from 'rxjs';
 import { JwtResponseModel } from '../../shared/model/jwt-respone.model';
@@ -11,7 +11,7 @@ import { AuthInfoService } from '../../../shared/services/auth-info.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   public loginFormGroup: LoginFormGroup = new LoginFormGroup();
   private unsubscribe: Subject<void> = new Subject<void>();
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.authManagerService.login(this.loginFormGroup.value)
       .pipe(take(1), takeUntil(this.unsubscribe))
       .subscribe((data: JwtResponseModel) => {
-        this.authInfoService.setJwtInfo(data)
+        this.authInfoService.setJwtInfo(data);
 
       }, (error: any) => {
         debugger

@@ -1,15 +1,19 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, first, Observable, Subject, throwError } from 'rxjs';
 import { SnackBarService } from '../../../shared/services/snack-bar.service';
+import { AuthInfoService } from '../../../shared/services/auth-info.service';
 
 export class BaseService {
   protected prefix: string = '';
   private headers: HttpHeaders = new HttpHeaders();
+  private unsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private httpClient: HttpClient,
+    private snackBarService: SnackBarService,
     prefix: string,
-    private snackBarService: SnackBarService) {
+    private authInfoService: AuthInfoService,
+  ) {
     this.prefix = prefix;
     this.headers = this.headers.append('Access-Control-Allow-Origin', '*');
     this.headers = this.headers.append('Access-Control-Allow-Credentials', 'true');
@@ -19,10 +23,13 @@ export class BaseService {
       ' Origin,Accept, X-Requested-With,' +
       ' Content-Type, Access-Control-Request-Method,' +
       ' Access-Control-Request-Headers');
+    this.headers = this.headers.append(`Content-Type`, `application/json`);
+    this.headers = this.headers.append(`Authorization`, `Bearer ${authInfoService.token}`);
   }
 
   public get(action: string): Observable<any> {
-    return this.httpClient.get(`${this.prefix}/${action}`).pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
+    debugger
+    return this.httpClient.get(`${this.prefix}/${action}`, {headers: this.headers}).pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
   }
 
   public getParameters(action: string, params: { [index: string]: any }): Observable<any> {
@@ -58,6 +65,14 @@ export class BaseService {
     return this.httpClient.delete(`${this.prefix}/${action}`, {headers: this.headers})
       .pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
 
+  }
+
+  private getUserInfo(): void {
+    this.get('getUserInfo')
+      .pipe(first())
+      .subscribe((data) => {
+        debugger
+      });
   }
 
   protected handleError(error: HttpErrorResponse) {

@@ -12,6 +12,7 @@ import { CrudModule } from './crud/crud.module';
 import { SnackBarModule } from './shared/components/snack-bar/snack-bar.module';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FlexModule } from '@angular/flex-layout';
+import { AuthInfoService } from './shared/services/auth-info.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { FlexModule } from '@angular/flex-layout';
     SnackBarModule,
     FlexModule
   ],
-  providers: [AppService],
+  providers: [AppService, AuthInfoService],
   bootstrap: [AppComponent],
   exports: []
 })

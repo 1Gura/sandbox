@@ -4,14 +4,22 @@ import { Observable } from 'rxjs';
 import { BaseService } from '../../../main/shared/services/base.service';
 import { TodoModel } from '../models/todo.model';
 import { SnackBarService } from '../../../shared/services/snack-bar.service';
+import { AuthInfoService } from '../../../shared/services/auth-info.service';
 
 @Injectable()
 
 export class CrudService extends BaseService {
   constructor(
     private http: HttpClient,
-    snackBarService: SnackBarService) {
-    super(http, 'https://localhost:7151/api/todo', snackBarService);
+    snackBarService: SnackBarService,
+    authInfoService: AuthInfoService
+  ) {
+    super(
+      http,
+      snackBarService,
+      'https://localhost:7151/api/AuthManagement',
+      authInfoService
+    );
   }
 
   public getTodos(): Observable<TodoModel[]> {

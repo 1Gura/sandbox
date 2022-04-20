@@ -4,6 +4,7 @@ import { AuthManagementService } from '../../shared/services/auth-management.ser
 import { Subject, take, takeUntil } from 'rxjs';
 import { SnackBarService } from '../../../shared/services/snack-bar.service';
 import { JwtResponseModel } from '../../shared/model/jwt-respone.model';
+import { AuthInfoService } from '../../../shared/services/auth-info.service';
 
 @Component({
   selector: 'app-register',
@@ -14,11 +15,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public registerFormGroup: RegisterFormGroup = new RegisterFormGroup();
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(private authManagerService: AuthManagementService, private snackBar: SnackBarService) {
+  constructor(
+    private authManagerService: AuthManagementService,
+    private snackBar: SnackBarService,
+    private authInfoService: AuthInfoService) {
   }
 
   public ngOnInit(): void {
-
   }
 
   public ngOnDestroy(): void {
@@ -35,7 +38,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authManagerService.register(this.registerFormGroup.value)
       .pipe(take(1), takeUntil(this.unsubscribe))
       .subscribe((data: JwtResponseModel) => {
-        debugger
+        this.authInfoService.setJwtInfo(data);
       }, (error: any) => {
         this.snackBar.openSnackBarArr(error.error.errors);
       });
