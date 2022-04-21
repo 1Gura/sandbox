@@ -1,18 +1,35 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RegisterFormGroup } from '../../shared/form/register.form-group';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthManagementService } from '../../shared/services/auth-management.service';
 import { Subject, take, takeUntil } from 'rxjs';
 import { SnackBarService } from '../../../shared/services/snack-bar.service';
 import { JwtResponseModel } from '../../shared/model/jwt-respone.model';
 import { AuthInfoService } from '../../../shared/services/auth-info.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit, OnDestroy {
-  public registerFormGroup: RegisterFormGroup = new RegisterFormGroup();
+export class RegisterComponent implements OnDestroy {
+  public registerFormGroup: FormGroup = new FormGroup({
+
+      email: new FormControl('', {
+        validators: [Validators.required, Validators.email],
+        asyncValidators: this.authManagerService.uniqueEmailValidator()
+      }),
+      password: new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(6)]
+      },),
+      userName: new FormControl('', [Validators.required]),
+      repeatPassword: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(6)],
+        asyncValidators: []
+      })
+    }
+  );
   private unsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
@@ -21,8 +38,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private authInfoService: AuthInfoService) {
   }
 
-  public ngOnInit(): void {
-  }
 
   public ngOnDestroy(): void {
     this.unsubscribe.next();

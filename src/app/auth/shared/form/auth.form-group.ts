@@ -6,7 +6,7 @@ export class AuthFormGroup extends FormGroup {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
           Validators.required,
-          Validators.minLength(6)], [/*checkValidPassword*/]),
+          Validators.minLength(6)]),
         ...formControlItem
       }
     );

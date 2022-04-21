@@ -15,7 +15,6 @@ export class AuthInfoService {
 
     this.token = localStorage.getItem('token');
     this.refreshToken = localStorage.getItem('refreshToken');
-    this.getUserInfo();
   }
 
   public setJwtInfo(jwtInfo: JwtResponseModel): void {

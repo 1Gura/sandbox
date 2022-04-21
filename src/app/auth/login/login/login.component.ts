@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { LoginFormGroup } from '../../shared/form/login.form-group';
 import { Subject, take, takeUntil } from 'rxjs';
 import { JwtResponseModel } from '../../shared/model/jwt-respone.model';
@@ -11,7 +11,7 @@ import { AuthInfoService } from '../../../shared/services/auth-info.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnDestroy {
   public loginFormGroup: LoginFormGroup = new LoginFormGroup();
   private unsubscribe: Subject<void> = new Subject<void>();
 
@@ -21,9 +21,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private authInfoService: AuthInfoService) {
   }
 
-  public ngOnInit(): void {
-
-  }
 
   public ngOnDestroy(): void {
     this.unsubscribe.next();

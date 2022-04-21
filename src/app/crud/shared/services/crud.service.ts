@@ -17,7 +17,7 @@ export class CrudService extends BaseService {
     super(
       http,
       snackBarService,
-      'https://localhost:7151/api/AuthManagement',
+      'https://localhost:7151/api/Todo',
       authInfoService
     );
   }

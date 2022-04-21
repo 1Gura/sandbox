@@ -7,6 +7,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Введите email</mat-label>
       <input [formControlName]="'email'" matInput placeholder="example@mail.com"/>
+      <mat-error *ngIf="registerFormGroup.get('email')?.errors?.['emailExists']">Такой Email уже занят</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Введите пароль</mat-label>
